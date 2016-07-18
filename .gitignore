@@ -17,3 +17,8 @@ sftp-config.json
 /sitemap.xml
 /sitemap.xml.gz
 
+node_modules
+.sass-cache
+.npm-debug.log
+tmp
+*.css.map

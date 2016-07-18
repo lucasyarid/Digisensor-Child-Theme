@@ -1,0 +1,22 @@
+{
+  "name": "digisensor",
+  "version": "1.0.0",
+  "description": "A child theme for the company Digisensor based on the theme.co X wordpress theme",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasyarid/Digisensor-Child-Theme.git"
+  },
+  "author": "Lucas Yarid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasyarid/Digisensor-Child-Theme/issues"
+  },
+  "homepage": "https://github.com/lucasyarid/Digisensor-Child-Theme#readme",
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-autoprefixer": "^3.0.4",
+    "grunt-contrib-sass": "^1.0.0",
+    "grunt-contrib-watch": "^1.0.0"
+  }
+}
