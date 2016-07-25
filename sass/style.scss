@@ -9,6 +9,118 @@ Version: 1.0.0
 Template: x
 
 */
-.h-landmark span {
-	color: #FFF; 
+.home {
+	.x-slider-container.below {
+		border-bottom: none;
+	}
+
+	.slide-sub-menu {
+		[class*= slide-sub-menu-] {
+			border-left: 1px solid #444;
+			p:before {
+				content: "";
+				display: inline-block;
+				width: 25px;
+				height: 20px;
+				position: relative;
+				margin-bottom: -2px;
+			}
+		}
+		.slide-sub-menu- {
+			&1 {
+				border-left: none;
+				p:before {
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-12.png") no-repeat;
+					left: -2px;
+					top: 6px;
+				}
+			}
+			&2 {
+				border-left: none;
+				p:before {
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-13.png") no-repeat;
+					left: -5px;
+					top: 5px;
+				}
+			}
+			&3 {
+				border-left: none;
+				p:before {
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-14.png") no-repeat;
+					left: -1px;
+					top: 4px;
+				}
+			}
+			&4 {
+				border-left: none;
+				p:before {
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-15.png") no-repeat;
+					left: 2px;
+					top: 4px;
+				}
+			}
+		}
+		p {
+			color: #FFF;
+			font-weight: 900;
+			font-size: 16px;
+			margin-bottom: 2px;
+			padding: 10px;
+		}
+	}
+}
+
+footer {
+	&.x-colophon.top {
+	    padding: 2.5% 0 1%;
+	}
+	.x-colophon.bottom .x-colophon-content {
+	    margin: 10px 0 5px;
+	}
+	.widget ul, .widget ol {
+		border: none;
+	}
+	.gform_wrapper {
+		.field_sublabel_hidden_label {
+			.ginput_complex.ginput_container {
+				input, select {
+					margin-bottom: 0;
+				}
+			}
+		}
+		.top_label {
+			li.gfield.gf_left_half{
+				margin-right: 0;
+				padding-right: 0;
+				width: 49%;
+				&+li.gfield {
+					clear: none;
+					padding: 0;
+				}
+			}
+			.gfield {
+				input, textarea {
+					background-color: #333;
+					border-radius: 0px;
+				}
+				textarea {
+					margin-top: 13px;
+				}
+				input {
+					padding-left: 10px !important;
+				}
+				.name_first input {
+					margin-top: 1px;
+				}
+				border-bottom: 0;
+				margin-top: 0;
+				margin-bottom: 0 !important;
+				padding-bottom: 0;
+				padding-left: 0px;
+				&_label {
+					display: none;
+				}
+			}		
+		} 
+	} 
 }

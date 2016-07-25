@@ -23,3 +23,4 @@ add_filter( 'x_enqueue_parent_stylesheet', '__return_true' );
 // Additional Functions
 // =============================================================================
 
+add_filter( 'gform_enable_field_label_visibility_settings', '__return_true' );

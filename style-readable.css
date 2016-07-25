@@ -9,6 +9,101 @@ Version: 1.0.0
 Template: x
 
 */
-.h-landmark span {
+.home .x-slider-container.below {
+  border-bottom: none;
+}
+.home .slide-sub-menu [class*=slide-sub-menu-] {
+  border-left: 1px solid #444;
+}
+.home .slide-sub-menu [class*=slide-sub-menu-] p:before {
+  content: "";
+  display: inline-block;
+  width: 25px;
+  height: 20px;
+  position: relative;
+  margin-bottom: -2px;
+}
+.home .slide-sub-menu .slide-sub-menu-1 {
+  border-left: none;
+}
+.home .slide-sub-menu .slide-sub-menu-1 p:before {
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-12.png") no-repeat;
+  left: -2px;
+  top: 6px;
+}
+.home .slide-sub-menu .slide-sub-menu-2 {
+  border-left: none;
+}
+.home .slide-sub-menu .slide-sub-menu-2 p:before {
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-13.png") no-repeat;
+  left: -5px;
+  top: 5px;
+}
+.home .slide-sub-menu .slide-sub-menu-3 {
+  border-left: none;
+}
+.home .slide-sub-menu .slide-sub-menu-3 p:before {
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-14.png") no-repeat;
+  left: -1px;
+  top: 4px;
+}
+.home .slide-sub-menu .slide-sub-menu-4 {
+  border-left: none;
+}
+.home .slide-sub-menu .slide-sub-menu-4 p:before {
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-15.png") no-repeat;
+  left: 2px;
+  top: 4px;
+}
+.home .slide-sub-menu p {
   color: #FFF;
+  font-weight: 900;
+  font-size: 16px;
+  margin-bottom: 2px;
+  padding: 10px;
+}
+
+footer.x-colophon.top {
+  padding: 2.5% 0 1%;
+}
+footer .x-colophon.bottom .x-colophon-content {
+  margin: 10px 0 5px;
+}
+footer .widget ul, footer .widget ol {
+  border: none;
+}
+footer .gform_wrapper .field_sublabel_hidden_label .ginput_complex.ginput_container input, footer .gform_wrapper .field_sublabel_hidden_label .ginput_complex.ginput_container select {
+  margin-bottom: 0;
+}
+footer .gform_wrapper .top_label li.gfield.gf_left_half {
+  margin-right: 0;
+  padding-right: 0;
+  width: 49%;
+}
+footer .gform_wrapper .top_label li.gfield.gf_left_half + li.gfield {
+  clear: none;
+  padding: 0;
+}
+footer .gform_wrapper .top_label .gfield {
+  border-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0 !important;
+  padding-bottom: 0;
+  padding-left: 0px;
+}
+footer .gform_wrapper .top_label .gfield input, footer .gform_wrapper .top_label .gfield textarea {
+  background-color: #333;
+  border-radius: 0px;
+}
+footer .gform_wrapper .top_label .gfield textarea {
+  margin-top: 13px;
+}
+footer .gform_wrapper .top_label .gfield input {
+  padding-left: 10px !important;
+}
+footer .gform_wrapper .top_label .gfield .name_first input {
+  margin-top: 1px;
+}
+footer .gform_wrapper .top_label .gfield_label {
+  display: none;
 }
