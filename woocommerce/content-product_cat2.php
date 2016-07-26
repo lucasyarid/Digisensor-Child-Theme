@@ -19,8 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 ?>
-
-<li <?php wc_product_cat_class_mainCat( '', $category );?>>
+<li <?php wc_product_cat_class_subCat( '', $category ); ?>>
 	<?php
 	/**
 	 * woocommerce_before_subcategory hook.
