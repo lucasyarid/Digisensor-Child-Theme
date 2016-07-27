@@ -57,8 +57,9 @@ function wc_product_cat_class_mainCat( $class = '', $category = null ) {
 function wc_product_cat_class_subCat( $class = '', $category = null ) {
 
 	// Find the category + category parent, if applicable
-	$term 			= get_queried_object();
-	$parent_id 		= empty( $term->term_id ) ? 0 : $term->term_id;
+	$term 			 = get_queried_object();
+	$parent_id 		 = empty( $term->term_id ) ? 0 : $term->term_id;
+	$grand_parent_id = $term->parent;
 
 	// Count Categories
 	$args = array(
@@ -70,10 +71,27 @@ function wc_product_cat_class_subCat( $class = '', $category = null ) {
 
 	$categories = get_terms( $args );
 	$main_cat_number = count( $categories );
-	$cat_column_number = floor(100 / $main_cat_number);
-	
-	// Separates classes with a single space, collates classes for post DIV
-	echo 'class="' . 'cat-menu-col-' . $cat_column_number . ' ' . esc_attr( join( ' ', wc_get_product_cat_class( $class, $category ) ) ) . '"';
+
+	// Check if is last child
+	if ( $main_cat_number == 0 ) {
+		$args = array(
+			'taxonomy'		=> 'product_cat',
+		    'parent'        => $grand_parent_id,
+		    'number'        => 10,
+		    'hide_empty'    => false
+		);
+		$categories = get_terms( $args );
+		$main_cat_number = count( $categories );
+		$cat_column_number = floor(100 / $main_cat_number);
+		
+		// Separates classes with a single space, collates classes for post DIV
+		echo 'class="' . 'cat-menu-col-' . $cat_column_number . ' ' . esc_attr( join( ' ', wc_get_product_cat_class( $class, $category ) ) ) . '"';
+	} else {
+		$cat_column_number = floor(100 / $main_cat_number);
+		
+		// Separates classes with a single space, collates classes for post DIV
+		echo 'class="' . 'cat-menu-col-' . $cat_column_number . ' ' . esc_attr( join( ' ', wc_get_product_cat_class( $class, $category ) ) ) . '"';
+	}
 }
 
 // Edit woocommerce content
@@ -118,18 +136,9 @@ if ( ! function_exists( 'woocommerce_content_new' ) ) {
 			<?php if ( have_posts() ) : ?>
 
 				<?php do_action('woocommerce_before_shop_loop'); ?>
-
-				<?php woocommerce_product_loop_start(); ?>
-
+				<div class="nav-categories">
 					<?php woocommerce_product_subcategories_new(); ?>
-
-					<?php while ( have_posts() ) : the_post(); ?>
-
-						<?php wc_get_template_part( 'content', 'product' ); ?>
-
-					<?php endwhile; // end of the loop. ?>
-
-				<?php woocommerce_product_loop_end(); ?>
+				</div>
 				
 				<hr class="x-clear">
 				<?php do_action('woocommerce_after_shop_loop'); ?>
@@ -139,9 +148,19 @@ if ( ! function_exists( 'woocommerce_content_new' ) ) {
 				<?php wc_get_template( 'loop/no-products-found.php' ); ?>
 
 			<?php endif; ?>
-			<div class="x-container max width"
+			<div class="x-container max width">
 				<?php do_action( 'woocommerce_archive_description' );?>
 			</div>
+			<?php woocommerce_product_loop_start(); ?>
+
+				<?php while ( have_posts() ) : the_post(); ?>
+
+					<?php wc_get_template_part( 'content', 'product' ); ?>
+
+				<?php endwhile; // end of the loop. ?>
+
+			<?php woocommerce_product_loop_end(); ?>
+
 			<?php
 		}
 	}
@@ -214,6 +233,21 @@ if ( ! function_exists( 'woocommerce_product_subcategories_new' ) ) {
 			'pad_counts'   => 1
 		) ) );
 
+		if ( empty($product_categories) ) {
+			$category = get_queried_object();
+			$current = $category->term_id;
+			$parent = $term->parent;
+			
+			$product_categories = get_categories( apply_filters( 'woocommerce_product_subcategories_new_args', array(
+				'parent'       => $parent,
+				'menu_order'   => 'ASC',
+				'hide_empty'   => 0,
+				'hierarchical' => 1,
+				'taxonomy'     => 'product_cat',
+				'pad_counts'   => 1
+			) ) );
+		}
+
 		if ( ! apply_filters( 'woocommerce_product_subcategories_new_hide_empty', false ) ) {
 			$product_categories = wp_list_filter( $product_categories, array( 'count' => 0 ), 'NOT' );
 		}
@@ -223,13 +257,13 @@ if ( ! function_exists( 'woocommerce_product_subcategories_new' ) ) {
 
 			if ($parent_id == 0) {
 				foreach ( $product_categories as $category ) {
-					wc_get_template( 'content-product_cat.php', array(
+					wc_get_template( 'content-product_cat_main.php', array(
 						'category' => $category
 					) );
 				}
 			}else {
 				foreach ( $product_categories as $category ) {
-					wc_get_template( 'content-product_cat2.php', array(
+					wc_get_template( 'content-product_cat_sub.php', array(
 						'category' => $category
 					) );
 				}
@@ -238,7 +272,7 @@ if ( ! function_exists( 'woocommerce_product_subcategories_new' ) ) {
 			// If we are hiding products disable the loop and pagination
 			if ( is_product_category() ) {
 				$display_type = get_woocommerce_term_meta( $term->term_id, 'display_type', true );
-
+				update_option( 'woocommerce_category_archive_display', 'both' );
 				switch ( $display_type ) {
 					case 'subcategories' :
 						$wp_query->post_count    = 0;
@@ -289,3 +323,30 @@ function woocommerce_category_image() {
 		}
 	}
 }
+
+// Remove orderby
+remove_action( 'woocommerce_before_shop_loop', 'woocommerce_catalog_ordering', 30 );
+function woocommerce_result_count() {
+        return;
+}
+
+if (  ! function_exists( 'woocommerce_template_loop_category_title_new' ) ) {
+
+	/**
+	 * Show the subcategory title in the product loop.
+	 */
+	function woocommerce_template_loop_category_title_new( $category ) {
+		?>
+		<h3>
+			<?php
+				echo $category->name;
+
+				if ( $category->count > 0 )
+					echo apply_filters( 'woocommerce_subcategory_count_html', '', $category );
+			?>
+		</h3>
+		<?php
+	}
+}
+remove_action( 'woocommerce_shop_loop_subcategory_title', 'woocommerce_template_loop_category_title', 10 );
+add_action( 'woocommerce_shop_loop_subcategory_title', 'woocommerce_template_loop_category_title_new', 10 );
