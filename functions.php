@@ -42,7 +42,7 @@ function wc_product_cat_class_mainCat( $class = '', $category = null ) {
 		'taxonomy'		=> 'product_cat',
 	    'parent'        => 0,
 	    'number'        => 10,
-	    'hide_empty'    => false
+	    'hide_empty'    => 1
 	);
 
 	$categories = get_terms( $args );
@@ -66,7 +66,7 @@ function wc_product_cat_class_subCat( $class = '', $category = null ) {
 		'taxonomy'		=> 'product_cat',
 	    'parent'        => $parent_id,
 	    'number'        => 10,
-	    'hide_empty'    => false
+	    'hide_empty'    => 1
 	);
 
 	$categories = get_terms( $args );
@@ -78,7 +78,7 @@ function wc_product_cat_class_subCat( $class = '', $category = null ) {
 			'taxonomy'		=> 'product_cat',
 		    'parent'        => $grand_parent_id,
 		    'number'        => 10,
-		    'hide_empty'    => false
+		    'hide_empty'    => 1
 		);
 		$categories = get_terms( $args );
 		$main_cat_number = count( $categories );
@@ -118,7 +118,7 @@ if ( ! function_exists( 'woocommerce_content_new' ) ) {
 		} else { ?>
 			<?php if (is_shop()) { ?>
 
-				<div class="x-section bg-image" style="margin: 0px;padding: 350px 0px 50px; background-image: url(/wp-content/uploads/2016/07/Bigstock_93179717.jpg); background-color: transparent;">
+				<div class="x-section bg-image" style="margin: 0px;padding: 50px 0px 350px; background-image: url(/wp-content/uploads/2016/07/Bigstock_93179717.jpg); background-color: transparent;">
 					<div class="x-container max width" style="margin: 0px auto;padding: 0px;">
 						<div class="x-column x-sm x-1-1" style="padding: 0px;">
 							<div class="x-text cs-ta-right">
@@ -154,8 +154,9 @@ if ( ! function_exists( 'woocommerce_content_new' ) ) {
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php while ( have_posts() ) : the_post(); ?>
-
-					<?php wc_get_template_part( 'content', 'product' ); ?>
+					<div class="x-container max width">
+						<?php wc_get_template_part( 'content', 'product' ); ?>
+					</div>
 
 				<?php endwhile; // end of the loop. ?>
 
@@ -227,7 +228,7 @@ if ( ! function_exists( 'woocommerce_product_subcategories_new' ) ) {
 		$product_categories = get_categories( apply_filters( 'woocommerce_product_subcategories_new_args', array(
 			'parent'       => $parent_id,
 			'menu_order'   => 'ASC',
-			'hide_empty'   => 0,
+			'hide_empty'   => 1,
 			'hierarchical' => 1,
 			'taxonomy'     => 'product_cat',
 			'pad_counts'   => 1
@@ -241,7 +242,7 @@ if ( ! function_exists( 'woocommerce_product_subcategories_new' ) ) {
 			$product_categories = get_categories( apply_filters( 'woocommerce_product_subcategories_new_args', array(
 				'parent'       => $parent,
 				'menu_order'   => 'ASC',
-				'hide_empty'   => 0,
+				'hide_empty'   => 1,
 				'hierarchical' => 1,
 				'taxonomy'     => 'product_cat',
 				'pad_counts'   => 1
@@ -307,20 +308,19 @@ function woocommerce_category_image() {
 	    $cat = $wp_query->get_queried_object();
 	    $thumbnail_id = get_woocommerce_term_meta( $cat->term_id, 'thumbnail_id', true );
 	    $image = wp_get_attachment_url( $thumbnail_id );
-	    if ( $image ) { ?>
+	    ?>
 
-	    	<div class="x-section bg-image" style="margin: 0px;padding: 350px 0px 50px; background-image: url(<?php echo $image ?>); background-color: transparent;">
-	    		<div class="x-container max width" style="margin: 0px auto;padding: 0px;">
-	    			<div class="x-column x-sm x-1-1" style="padding: 0px;">
-	    				<div class="x-text cs-ta-right">
-	    					<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
-	    				</div>
+	    <div class="x-section bg-image" style="margin: 0px;padding: 50px 0px 350px; background-image: url(<?php echo $image ?>); background-color: transparent;">
+	    	<div class="x-container max width" style="margin: 0px auto;padding: 0px;">
+	    		<div class="x-column x-sm x-1-1" style="padding: 0px;">
+	    			<div class="x-text cs-ta-right">
+	    				<h1 class="page-title"><?php woocommerce_page_title(); ?></h1>
 	    			</div>
 	    		</div>
 	    	</div>
+	    </div>
 
 	    	<?php
-		}
 	}
 }
 
@@ -350,3 +350,18 @@ if (  ! function_exists( 'woocommerce_template_loop_category_title_new' ) ) {
 }
 remove_action( 'woocommerce_shop_loop_subcategory_title', 'woocommerce_template_loop_category_title', 10 );
 add_action( 'woocommerce_shop_loop_subcategory_title', 'woocommerce_template_loop_category_title_new', 10 );
+
+// Configure products
+function x_woocommerce_before_shop_loop_item_title_new() {
+  echo '<div class="entry-wrap"><header class="entry-header">';
+}
+
+remove_action( 'woocommerce_shop_loop_item_title', 'x_woocommerce_before_shop_loop_item_title', 99 );
+add_action( 'woocommerce_shop_loop_item_title', 'x_woocommerce_before_shop_loop_item_title_new', 10 );
+
+function x_woocommerce_after_shop_loop_item_title_new() {
+  echo '</header></div>';
+}
+
+remove_action( 'woocommerce_shop_loop_item_title', 'x_woocommerce_after_shop_loop_item_title', 99 );
+add_action( 'woocommerce_shop_loop_item_title', 'x_woocommerce_after_shop_loop_item_title_new', 10 );

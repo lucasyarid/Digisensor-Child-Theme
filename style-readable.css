@@ -9,10 +9,6 @@ Version: 1.0.0
 Template: x
 
 */
-.x-main.full {
-  min-height: 900px;
-}
-
 .home .x-slider-container.below {
   border-bottom: none;
 }
@@ -61,7 +57,7 @@ Template: x
 }
 .home .slide-sub-menu p {
   color: #FFF;
-  font-weight: 900;
+  font-weight: 500;
   font-size: 16px;
   margin-bottom: 2px;
   padding: 10px;
@@ -69,6 +65,7 @@ Template: x
 
 footer.x-colophon.top {
   padding: 2.5% 0 1%;
+  margin-top: 10%;
 }
 footer .x-colophon.bottom .x-colophon-content {
   margin: 10px 0 5px;
@@ -115,8 +112,13 @@ footer .gform_wrapper .top_label .gfield_label {
   display: none;
 }
 
+.woocommerce .x-section.bg-image {
+  min-height: 590px;
+}
 .woocommerce .page-title {
   text-transform: uppercase;
+  text-align: left;
+  color: #FFF;
 }
 .woocommerce .x-header-landmark {
   display: none;
@@ -124,7 +126,6 @@ footer .gform_wrapper .top_label .gfield_label {
 .woocommerce .nav-categories {
   height: 60px;
   background-color: #333;
-  margin: 0 !important;
 }
 .woocommerce .nav-categories li.product.product-category {
   box-shadow: none;
@@ -156,6 +157,19 @@ footer .gform_wrapper .top_label .gfield_label {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   padding: 0 10px;
+}
+.woocommerce ul.products {
+  margin-top: 100px;
+}
+.woocommerce li.product .entry-product .entry-featured {
+  width: 25%;
+  float: left;
+}
+.woocommerce li.product .entry-wrap {
+  float: left;
+}
+.woocommerce li.product .entry-header .button {
+  display: none !important;
 }
 .woocommerce .term-description {
   font-size: 18px;

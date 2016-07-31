@@ -9,9 +9,6 @@ Version: 1.0.0
 Template: x
 
 */
-.x-main.full {
-	min-height: 900px;
-}
 
 .home {
 	.x-slider-container.below {
@@ -66,7 +63,7 @@ Template: x
 		}
 		p {
 			color: #FFF;
-			font-weight: 900;
+			font-weight: 500;
 			font-size: 16px;
 			margin-bottom: 2px;
 			padding: 10px;
@@ -77,6 +74,7 @@ Template: x
 footer {
 	&.x-colophon.top {
 	    padding: 2.5% 0 1%;
+	    margin-top: 10%;
 	}
 	.x-colophon.bottom .x-colophon-content {
 	    margin: 10px 0 5px;
@@ -133,8 +131,13 @@ footer {
 }
 
 .woocommerce {
+	.x-section.bg-image {
+		min-height: 590px;
+	}
 	.page-title {
 		text-transform: uppercase;
+    	text-align: left;
+    	color: #FFF;
 	}
 	.x-header-landmark {
 		display: none;
@@ -142,7 +145,6 @@ footer {
 	.nav-categories {
 		height: 60px;
 		background-color: #333;
-		margin: 0 !important;
 		li.product.product-category {
 			box-shadow: none;
 			background-color: #333;
@@ -172,6 +174,25 @@ footer {
 			    margin-right: -50%;
 			    transform: translate(-50%, -50%);
 				padding: 0 10px;
+			}
+		}
+	}
+	ul.products {
+		margin-top: 100px;
+	}
+	li.product {
+		.entry-product {
+			.entry-featured {
+				width: 25%;
+				float: left;
+			}
+		}
+		.entry-wrap {
+			float: left;
+		}
+		.entry-header {
+			.button {
+				display: none !important;
 			}
 		}
 	}
