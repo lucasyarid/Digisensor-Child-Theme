@@ -141,26 +141,22 @@ if ( ! function_exists( 'woocommerce_content_new' ) ) {
 				</div>
 				
 				<hr class="x-clear">
-				<?php do_action('woocommerce_after_shop_loop'); ?>
+				<div class="x-container max width">
 
 			<?php elseif ( ! woocommerce_product_subcategories_new( array( 'before' => woocommerce_product_loop_start( false ), 'after' => woocommerce_product_loop_end( false ) ) ) ) : ?>
 
 				<?php wc_get_template( 'loop/no-products-found.php' ); ?>
 
 			<?php endif; ?>
-			<div class="x-container max width">
 				<?php do_action( 'woocommerce_archive_description' );?>
-			</div>
 			<?php woocommerce_product_loop_start(); ?>
 
 				<?php while ( have_posts() ) : the_post(); ?>
-					<div class="x-container max width">
 						<?php wc_get_template_part( 'content', 'product' ); ?>
-					</div>
-
 				<?php endwhile; // end of the loop. ?>
-
+			</div>
 			<?php woocommerce_product_loop_end(); ?>
+			<?php do_action('woocommerce_after_shop_loop'); ?>
 
 			<?php
 		}
@@ -365,3 +361,33 @@ function x_woocommerce_after_shop_loop_item_title_new() {
 
 remove_action( 'woocommerce_shop_loop_item_title', 'x_woocommerce_after_shop_loop_item_title', 99 );
 add_action( 'woocommerce_shop_loop_item_title', 'x_woocommerce_after_shop_loop_item_title_new', 10 );
+
+// Remove pagination
+add_filter( 'loop_shop_per_page', create_function( '$cols', 'return 90;' ), 20 );
+
+// Add product content
+add_action( 'woocommerce_after_shop_loop_item_title', 'woocommerce_product_content', 9);
+add_action('the_content','woo_content_div');
+
+function woo_content_div( $content ){
+	return '<div class="product-content">'.$content.'</div>';
+};
+
+if (!function_exists('woocommerce_product_content')) {
+	function woocommerce_product_content() {
+		echo the_content();
+	}
+};
+
+function woocommerce_img_pdf() {
+	$productImg = get_the_post_thumbnail($post_id, 'full');
+	$file = get_field('pdf_file');
+	if ($file) {
+		$productFile = '<a target="_blank" class="productPdf" href="' . $file['url'] .'">'. $file['filename'].'</a>';
+		$productFileContainer = '<div class="product-file-container"><p>Downloads disponíveis:</p>'.$productFile.'</div>';
+	};
+	echo '<div class="entry-featured">'.$productImg.$productFileContainer.'</div>';
+}
+
+add_action( 'woocommerce_before_shop_loop_item_title_new', 'woocommerce_img_pdf', 11 );
+add_action( 'woocommerce_before_shop_loop_item_title_new', 'x_woocommerce_before_shop_loop_item_title', 10 );

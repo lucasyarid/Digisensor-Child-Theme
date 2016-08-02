@@ -15,6 +15,56 @@ Template: x
 		border-bottom: none;
 	}
 
+	.container-form {
+		.gform_wrapper {
+			.field_sublabel_hidden_label {
+				.ginput_complex.ginput_container {
+					input, select {
+						margin-bottom: 0;
+					}
+				}
+			}
+			ul.gform_fields li.gfield {
+			    padding-right: 0 !important;
+			}
+			.top_label {
+				li.gfield.gf_left_half{
+					margin-right: 0;
+					padding-right: 0;
+					width: 49%;
+					&+li.gfield {
+						clear: none;
+						padding: 0;
+						width: 51%;
+					}
+				}
+				.gfield {
+					input, textarea {
+						background-color: #333;
+						border-radius: 0px;
+					}
+					textarea {
+						margin-top: 13px;
+					}
+					input {
+						padding-left: 10px !important;
+					}
+					.name_first input {
+						margin-top: 1px;
+					}
+					border-bottom: 0;
+					margin-top: 0;
+					margin-bottom: 0 !important;
+					padding-bottom: 0;
+					padding-left: 0px;
+					&_label {
+						display: none;
+					}
+				}		
+			}
+		}
+	}
+
 	.slide-sub-menu {
 		[class*= slide-sub-menu-] {
 			border-left: 1px solid #444;
@@ -81,55 +131,10 @@ footer {
 	}
 	.widget ul, .widget ol {
 		border: none;
-	}
-	.gform_wrapper {
-		.field_sublabel_hidden_label {
-			.ginput_complex.ginput_container {
-				input, select {
-					margin-bottom: 0;
-				}
-			}
-		}
-		ul.gform_fields li.gfield {
-		    padding-right: 0 !important;
-		}
-		.top_label {
-			li.gfield.gf_left_half{
-				margin-right: 0;
-				padding-right: 0;
-				width: 49%;
-				&+li.gfield {
-					clear: none;
-					padding: 0;
-				}
-			}
-			.gfield {
-				input, textarea {
-					background-color: #333;
-					border-radius: 0px;
-				}
-				textarea {
-					margin-top: 13px;
-				}
-				input {
-					padding-left: 10px !important;
-				}
-				.name_first input {
-					margin-top: 1px;
-				}
-				border-bottom: 0;
-				margin-top: 0;
-				margin-bottom: 0 !important;
-				padding-bottom: 0;
-				padding-left: 0px;
-				&_label {
-					display: none;
-				}
-			}		
-		} 
 	} 
 }
 
+.admin-bar.woocommerce .nav-categories.scroll {top: 123px;}
 .woocommerce {
 	.x-section.bg-image {
 		min-height: 590px;
@@ -145,6 +150,12 @@ footer {
 	.nav-categories {
 		height: 60px;
 		background-color: #333;
+		&.scroll {
+			position: fixed;
+			top: 91px;
+			width: 100%;
+			z-index: 500;
+		}
 		li.product.product-category {
 			box-shadow: none;
 			background-color: #333;
@@ -177,23 +188,58 @@ footer {
 			}
 		}
 	}
+	.scroll ~ .x-container {
+		margin-top: 60px;
+	}
 	ul.products {
-		margin-top: 100px;
+		padding-top: 100px;
+		a:not(.productPdf) {
+			cursor: default !important;
+		}
 	}
 	li.product {
+		box-shadow: none !important;
 		.entry-product {
 			.entry-featured {
-				width: 25%;
+				width: 20%;
 				float: left;
+				border-bottom: none !important;
+				box-shadow: none !important;
+			}
+		}
+		.product-file-container {
+			height: 100px;
+			padding: 20px;
+			background-color: #eee;
+			margin-top: 5px;
+			p {
+				color: initial; 
 			}
 		}
 		.entry-wrap {
 			float: left;
-		}
-		.entry-header {
-			.button {
-				display: none !important;
+			box-shadow: none;
+			padding: 0 !important;
+			.entry-wrap {
+				display: none;
 			}
+		}
+		.product-content {
+			width: 80%;
+			float: left;
+			padding-left: 20px;
+		}
+		h3 {
+			padding-left: 20px;
+			text-transform: uppercase;
+			width: 80%;
+			float: left;
+			a:hover {
+				color: inherit !important; 
+			}
+		}
+		.button {
+			display: none !important;
 		}
 	}
 	.term-description {
@@ -206,5 +252,39 @@ footer {
 	$width: percentage($i / 100) !important;
 	.cat-menu-col-#{$i} {
 		width: $width
+	}
+}
+
+@media (max-width: 979px) {
+	.admin-bar.woocommerce .nav-categories.scroll {
+    	top: 0;
+	}
+	.woocommerce {
+		.scroll ~ .x-container {
+			margin-top: 0;
+		}
+		.nav-categories {
+			&.scroll {
+				position: inherit;
+				top: initial; 
+			}
+			[class*= cat-menu-col-]	{
+				width: 100% !important;
+			}		
+		}
+		li.product {
+			.entry-product {
+				.entry-featured {
+					width: 100%;
+				}
+				.product-content {
+					width: 100%;
+				}
+				h3 {
+					margin-top: 20px !important;
+					width: 100%;
+				}
+			}
+		}
 	}
 }
