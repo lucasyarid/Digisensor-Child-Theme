@@ -118,7 +118,7 @@ if ( ! function_exists( 'woocommerce_content_new' ) ) {
 		} else { ?>
 			<?php if (is_shop()) { ?>
 
-				<div class="x-section bg-image" style="margin: 0px;padding: 50px 0px 350px; background-image: url(/wp-content/uploads/2016/07/Bigstock_93179717.jpg); background-color: transparent;">
+				<div class="x-section bg-image" style="margin: 0px;padding: 260px 0px 50px; background-image: url(/wp-content/uploads/2016/08/3108547829_e6d0f5e37b_b.jpg); background-color: transparent;">
 					<div class="x-container max width" style="margin: 0px auto;padding: 0px;">
 						<div class="x-column x-sm x-1-1" style="padding: 0px;">
 							<div class="x-text cs-ta-right">
@@ -306,7 +306,7 @@ function woocommerce_category_image() {
 	    $image = wp_get_attachment_url( $thumbnail_id );
 	    ?>
 
-	    <div class="x-section bg-image" style="margin: 0px;padding: 50px 0px 350px; background-image: url(<?php echo $image ?>); background-color: transparent;">
+	    <div class="x-section bg-image" style="margin: 0px;padding: 260px 0px 50px; background-image: url(<?php echo $image ?>); background-color: transparent;">
 	    	<div class="x-container max width" style="margin: 0px auto;padding: 0px;">
 	    		<div class="x-column x-sm x-1-1" style="padding: 0px;">
 	    			<div class="x-text cs-ta-right">
@@ -380,14 +380,85 @@ if (!function_exists('woocommerce_product_content')) {
 };
 
 function woocommerce_img_pdf() {
-	$productImg = get_the_post_thumbnail($post_id, 'full');
-	$file = get_field('pdf_file');
-	if ($file) {
-		$productFile = '<a target="_blank" class="productPdf" href="' . $file['url'] .'">'. $file['filename'].'</a>';
-		$productFileContainer = '<div class="product-file-container"><p>Downloads disponíveis:</p>'.$productFile.'</div>';
-	};
-	echo '<div class="entry-featured">'.$productImg.$productFileContainer.'</div>';
+	$productImg = get_the_post_thumbnail($post_id, 'full'); ?>
+
+	<div class="entry-featured">
+		<?php echo $productImg; ?>
+		
+		<?php // check if the repeater field has rows of data
+		if( have_rows('pdf_file_container') ): ?>
+			<div class="product-file-container">
+				<p>Downloads disponíveis:</p>
+				<ul>
+					<?php while( have_rows('pdf_file_container') ): the_row(); 
+						$file = get_sub_field('pdf_file');?>
+						<li><a class="productPdf" target="_blank" href="<?php echo $file['url']; ?>">
+							<?php echo $file['title']; ?>
+						</a></li>
+					<?php endwhile; ?>
+				</ul>
+			</div>
+
+		<?php endif; ?>
+	</div>
+<?php
 }
 
 add_action( 'woocommerce_before_shop_loop_item_title_new', 'woocommerce_img_pdf', 11 );
 add_action( 'woocommerce_before_shop_loop_item_title_new', 'x_woocommerce_before_shop_loop_item_title', 10 );
+
+// Disable comments
+// Disable support for comments and trackbacks in post types
+function df_disable_comments_post_types_support() {
+	$post_types = get_post_types();
+	foreach ($post_types as $post_type) {
+		if(post_type_supports($post_type, 'comments')) {
+			remove_post_type_support($post_type, 'comments');
+			remove_post_type_support($post_type, 'trackbacks');
+		}
+	}
+}
+add_action('admin_init', 'df_disable_comments_post_types_support');
+
+// Close comments on the front-end
+function df_disable_comments_status() {
+	return false;
+}
+add_filter('comments_open', 'df_disable_comments_status', 20, 2);
+add_filter('pings_open', 'df_disable_comments_status', 20, 2);
+
+// Hide existing comments
+function df_disable_comments_hide_existing_comments($comments) {
+	$comments = array();
+	return $comments;
+}
+add_filter('comments_array', 'df_disable_comments_hide_existing_comments', 10, 2);
+
+// Remove comments page in menu
+function df_disable_comments_admin_menu() {
+	remove_menu_page('edit-comments.php');
+}
+add_action('admin_menu', 'df_disable_comments_admin_menu');
+
+// Redirect any user trying to access comments page
+function df_disable_comments_admin_menu_redirect() {
+	global $pagenow;
+	if ($pagenow === 'edit-comments.php') {
+		wp_redirect(admin_url()); exit;
+	}
+}
+add_action('admin_init', 'df_disable_comments_admin_menu_redirect');
+
+// Remove comments metabox from dashboard
+function df_disable_comments_dashboard() {
+	remove_meta_box('dashboard_recent_comments', 'dashboard', 'normal');
+}
+add_action('admin_init', 'df_disable_comments_dashboard');
+
+// Remove comments links from admin bar
+function df_disable_comments_admin_bar() {
+	if (is_admin_bar_showing()) {
+		remove_action('admin_bar_menu', 'wp_admin_bar_comments_menu', 60);
+	}
+}
+add_action('init', 'df_disable_comments_admin_bar');

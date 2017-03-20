@@ -10,6 +10,16 @@ Template: x
 
 */
 
+h1 {
+	font-size: 300%;
+}
+
+.x-navbar  {
+	.desktop .x-nav > li ul.sub-menu {
+   		top: 62px;
+   	}
+}
+
 .home {
 	.x-slider-container.below {
 		border-bottom: none;
@@ -40,7 +50,7 @@ Template: x
 				}
 				.gfield {
 					input, textarea {
-						background-color: #333;
+						background-color: #3F3F3F;
 						border-radius: 0px;
 					}
 					textarea {
@@ -81,7 +91,7 @@ Template: x
 			&1 {
 				border-left: none;
 				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-12.png") no-repeat;
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-12.png") no-repeat;
 					left: -2px;
 					top: 6px;
 				}
@@ -89,7 +99,7 @@ Template: x
 			&2 {
 				border-left: none;
 				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-13.png") no-repeat;
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-13.png") no-repeat;
 					left: -5px;
 					top: 5px;
 				}
@@ -97,7 +107,7 @@ Template: x
 			&3 {
 				border-left: none;
 				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-14.png") no-repeat;
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-14.png") no-repeat;
 					left: -1px;
 					top: 4px;
 				}
@@ -105,7 +115,7 @@ Template: x
 			&4 {
 				border-left: none;
 				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-15.png") no-repeat;
+					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-15.png") no-repeat;
 					left: 2px;
 					top: 4px;
 				}
@@ -114,11 +124,16 @@ Template: x
 		p {
 			color: #FFF;
 			font-weight: 500;
-			font-size: 16px;
+			font-size: 13px;
 			margin-bottom: 2px;
 			padding: 10px;
+			text-transform: uppercase;
 		}
 	}
+}
+
+.x-comments-area {
+	display: none;
 }
 
 footer {
@@ -134,11 +149,8 @@ footer {
 	} 
 }
 
-.admin-bar.woocommerce .nav-categories.scroll {top: 123px;}
+.admin-bar.woocommerce .nav-categories.scroll {top: 98px;}
 .woocommerce {
-	.x-section.bg-image {
-		min-height: 590px;
-	}
 	.page-title {
 		text-transform: uppercase;
     	text-align: left;
@@ -149,16 +161,16 @@ footer {
 	}
 	.nav-categories {
 		height: 60px;
-		background-color: #333;
+		background-color: #3F3F3F;
 		&.scroll {
 			position: fixed;
-			top: 91px;
+			top: 66px;
 			width: 100%;
 			z-index: 500;
 		}
 		li.product.product-category {
 			box-shadow: none;
-			background-color: #333;
+			background-color: #3F3F3F;
 			border-radius: 0;
 			height: 60px;
 			float: left;
@@ -174,7 +186,7 @@ footer {
 				display: block;
 			}
 			h3 {
-				font-size: 14px;
+				font-size: 13px;
 				text-transform: uppercase;
 				color: #FFF;
 				margin: 0;
@@ -208,7 +220,6 @@ footer {
 			}
 		}
 		.product-file-container {
-			height: 100px;
 			padding: 20px;
 			background-color: #eee;
 			margin-top: 5px;
@@ -220,6 +231,7 @@ footer {
 			float: left;
 			box-shadow: none;
 			padding: 0 !important;
+			width: 100%;
 			.entry-wrap {
 				display: none;
 			}
@@ -243,9 +255,72 @@ footer {
 		}
 	}
 	.term-description {
-		font-size: 18px;
-		margin: 40px 0;
+		font-size: 13px;
+		margin: 20px 0;
 	}
+}
+
+footer {
+	.widget_nav_menu ul li a:before,
+	.widget_meta ul li a:before,
+	.widget_pages ul li a:before {
+		display: none;
+	}
+	.widget_nav_menu ul li a,
+	.widget_meta ul li a,
+	.widget_pages ul li a {
+		border-bottom: none; 
+	}
+	.widget ul,
+	.widget ol {
+		box-shadow: none; 
+	}
+	.widget ul li a,
+	.widget ol li a {
+		color: #aaa;
+		box-shadow: none;
+		text-transform: uppercase;
+		padding: 5px;
+		text-shadow: none;
+	}
+	.widget_nav_menu .current-menu-item>a,
+	.widget_nav_menu ul li a:hover,
+	.widget_meta ul li a:hover,
+	.widget_pages ul li a:hover {
+	    background-color: transparent;
+	    color: #FFF;
+	}
+	&.x-colophon{
+		&.top {
+    		background-color: #3F3F3F;
+    		padding: 30px 0 0px;
+    	}
+    	&.bottom {
+    		background-color: #3F3F3F;
+    		.x-colophon-content {
+	    		margin: 7px;
+	    		p {
+	    			color: #FFF;
+	    			margin: 0;
+	    			text-transform: uppercase;
+	    		}
+	    	}
+    	}
+    	.widget {
+    	    margin-top: .4em;
+    	}
+    }
+    .h-widget {
+    	font-size: 16px;
+    	color: #FFF; 
+    }
+    .x-btn.x-btn-large {
+    	padding: 10px 20px;
+    	font-size: 12px;
+    }
+    .x-container.max {
+        max-width: 830px;
+    }
 }
 
 @for $i from 1 through 100 {

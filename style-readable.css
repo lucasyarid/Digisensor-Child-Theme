@@ -9,6 +9,14 @@ Version: 1.0.0
 Template: x
 
 */
+h1 {
+  font-size: 300%;
+}
+
+.x-navbar .desktop .x-nav > li ul.sub-menu {
+  top: 62px;
+}
+
 .home .x-slider-container.below {
   border-bottom: none;
 }
@@ -36,7 +44,7 @@ Template: x
   padding-left: 0px;
 }
 .home .container-form .gform_wrapper .top_label .gfield input, .home .container-form .gform_wrapper .top_label .gfield textarea {
-  background-color: #333;
+  background-color: #3F3F3F;
   border-radius: 0px;
 }
 .home .container-form .gform_wrapper .top_label .gfield textarea {
@@ -66,7 +74,7 @@ Template: x
   border-left: none;
 }
 .home .slide-sub-menu .slide-sub-menu-1 p:before {
-  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-12.png") no-repeat;
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-12.png") no-repeat;
   left: -2px;
   top: 6px;
 }
@@ -74,7 +82,7 @@ Template: x
   border-left: none;
 }
 .home .slide-sub-menu .slide-sub-menu-2 p:before {
-  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-13.png") no-repeat;
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-13.png") no-repeat;
   left: -5px;
   top: 5px;
 }
@@ -82,7 +90,7 @@ Template: x
   border-left: none;
 }
 .home .slide-sub-menu .slide-sub-menu-3 p:before {
-  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-14.png") no-repeat;
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-14.png") no-repeat;
   left: -1px;
   top: 4px;
 }
@@ -90,16 +98,21 @@ Template: x
   border-left: none;
 }
 .home .slide-sub-menu .slide-sub-menu-4 p:before {
-  background: url("http://digisensor.com.br/wp-content/uploads/2016/07/Shape-15.png") no-repeat;
+  background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-15.png") no-repeat;
   left: 2px;
   top: 4px;
 }
 .home .slide-sub-menu p {
   color: #FFF;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 13px;
   margin-bottom: 2px;
   padding: 10px;
+  text-transform: uppercase;
+}
+
+.x-comments-area {
+  display: none;
 }
 
 footer.x-colophon.top {
@@ -114,12 +127,9 @@ footer .widget ul, footer .widget ol {
 }
 
 .admin-bar.woocommerce .nav-categories.scroll {
-  top: 123px;
+  top: 98px;
 }
 
-.woocommerce .x-section.bg-image {
-  min-height: 590px;
-}
 .woocommerce .page-title {
   text-transform: uppercase;
   text-align: left;
@@ -130,17 +140,17 @@ footer .widget ul, footer .widget ol {
 }
 .woocommerce .nav-categories {
   height: 60px;
-  background-color: #333;
+  background-color: #3F3F3F;
 }
 .woocommerce .nav-categories.scroll {
   position: fixed;
-  top: 91px;
+  top: 66px;
   width: 100%;
   z-index: 500;
 }
 .woocommerce .nav-categories li.product.product-category {
   box-shadow: none;
-  background-color: #333;
+  background-color: #3F3F3F;
   border-radius: 0;
   height: 60px;
   float: left;
@@ -157,7 +167,7 @@ footer .widget ul, footer .widget ol {
   display: block;
 }
 .woocommerce .nav-categories li.product.product-category h3 {
-  font-size: 14px;
+  font-size: 13px;
   text-transform: uppercase;
   color: #FFF;
   margin: 0;
@@ -188,7 +198,6 @@ footer .widget ul, footer .widget ol {
   box-shadow: none !important;
 }
 .woocommerce li.product .product-file-container {
-  height: 100px;
   padding: 20px;
   background-color: #eee;
   margin-top: 5px;
@@ -200,6 +209,7 @@ footer .widget ul, footer .widget ol {
   float: left;
   box-shadow: none;
   padding: 0 !important;
+  width: 100%;
 }
 .woocommerce li.product .entry-wrap .entry-wrap {
   display: none;
@@ -222,8 +232,67 @@ footer .widget ul, footer .widget ol {
   display: none !important;
 }
 .woocommerce .term-description {
-  font-size: 18px;
-  margin: 40px 0;
+  font-size: 13px;
+  margin: 20px 0;
+}
+
+footer .widget_nav_menu ul li a:before,
+footer .widget_meta ul li a:before,
+footer .widget_pages ul li a:before {
+  display: none;
+}
+footer .widget_nav_menu ul li a,
+footer .widget_meta ul li a,
+footer .widget_pages ul li a {
+  border-bottom: none;
+}
+footer .widget ul,
+footer .widget ol {
+  box-shadow: none;
+}
+footer .widget ul li a,
+footer .widget ol li a {
+  color: #aaa;
+  box-shadow: none;
+  text-transform: uppercase;
+  padding: 5px;
+  text-shadow: none;
+}
+footer .widget_nav_menu .current-menu-item > a,
+footer .widget_nav_menu ul li a:hover,
+footer .widget_meta ul li a:hover,
+footer .widget_pages ul li a:hover {
+  background-color: transparent;
+  color: #FFF;
+}
+footer.x-colophon.top {
+  background-color: #3F3F3F;
+  padding: 30px 0 0px;
+}
+footer.x-colophon.bottom {
+  background-color: #3F3F3F;
+}
+footer.x-colophon.bottom .x-colophon-content {
+  margin: 7px;
+}
+footer.x-colophon.bottom .x-colophon-content p {
+  color: #FFF;
+  margin: 0;
+  text-transform: uppercase;
+}
+footer.x-colophon .widget {
+  margin-top: .4em;
+}
+footer .h-widget {
+  font-size: 16px;
+  color: #FFF;
+}
+footer .x-btn.x-btn-large {
+  padding: 10px 20px;
+  font-size: 12px;
+}
+footer .x-container.max {
+  max-width: 830px;
 }
 
 .cat-menu-col-1 {
