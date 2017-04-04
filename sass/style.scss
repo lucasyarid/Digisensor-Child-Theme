@@ -20,6 +20,10 @@ h1 {
    	}
 }
 
+.x-icon-home {
+	font-size: 22px;
+}
+
 .home {
 	.x-slider-container.below {
 		border-bottom: none;
@@ -74,66 +78,26 @@ h1 {
 			}
 		}
 	}
+}
 
-	.slide-sub-menu {
-		[class*= slide-sub-menu-] {
-			border-left: 1px solid #444;
-			p:before {
-				content: "";
-				display: inline-block;
-				width: 25px;
-				height: 20px;
-				position: relative;
-				margin-bottom: -2px;
-			}
-		}
-		.slide-sub-menu- {
-			&1 {
-				border-left: none;
-				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-12.png") no-repeat;
-					left: -2px;
-					top: 6px;
-				}
-			}
-			&2 {
-				border-left: none;
-				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-13.png") no-repeat;
-					left: -5px;
-					top: 5px;
-				}
-			}
-			&3 {
-				border-left: none;
-				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-14.png") no-repeat;
-					left: -1px;
-					top: 4px;
-				}
-			}
-			&4 {
-				border-left: none;
-				p:before {
-					background: url("http://digisensor.com.br/wp-content/uploads/2016/08/Shape-15.png") no-repeat;
-					left: 2px;
-					top: 4px;
-				}
-			}
-		}
-		p {
-			color: #FFF;
-			font-weight: 500;
-			font-size: 13px;
-			margin-bottom: 2px;
-			padding: 10px;
-			text-transform: uppercase;
-		}
+.x-comments-area, .single-post .entry-featured {
+	display: none;
+}
+
+.single-post {
+	.entry-content {
+		.x-img {
+		  display: block;
+		  margin: 20px auto;
+		}		
 	}
 }
 
-.x-comments-area {
-	display: none;
+
+
+.more-link {
+	font-weight: 400;
+	text-transform: lowercase;
 }
 
 footer {
@@ -151,16 +115,24 @@ footer {
 
 .admin-bar.woocommerce .nav-categories.scroll {top: 98px;}
 .woocommerce {
+	&.term-protecao-contra-explosao, &.term-deteccao-e-supressao-de-explosao, &.term-sistemas-especiais {
+		.page-title {
+	    	color: #000;
+		}
+	}
+}
+.woocommerce {
 	.page-title {
 		text-transform: uppercase;
     	text-align: left;
     	color: #FFF;
+    	
 	}
 	.x-header-landmark {
 		display: none;
 	}
 	.nav-categories {
-		height: 60px;
+		height: 40px;
 		background-color: #3F3F3F;
 		&.scroll {
 			position: fixed;
@@ -172,7 +144,7 @@ footer {
 			box-shadow: none;
 			background-color: #3F3F3F;
 			border-radius: 0;
-			height: 60px;
+			height: 40px;
 			float: left;
 			clear: none;
 			margin: 0;
@@ -186,7 +158,8 @@ footer {
 				display: block;
 			}
 			h3 {
-				font-size: 13px;
+				font-size: 12px;
+				letter-spacing: .1em;
 				text-transform: uppercase;
 				color: #FFF;
 				margin: 0;
@@ -201,7 +174,7 @@ footer {
 		}
 	}
 	.scroll ~ .x-container {
-		margin-top: 60px;
+		margin-top: 40px;
 	}
 	ul.products {
 		padding-top: 100px;
@@ -213,7 +186,7 @@ footer {
 		box-shadow: none !important;
 		.entry-product {
 			.entry-featured {
-				width: 20%;
+				width: 25%;
 				float: left;
 				border-bottom: none !important;
 				box-shadow: none !important;
@@ -237,14 +210,14 @@ footer {
 			}
 		}
 		.product-content {
-			width: 80%;
+			width: 75%;
 			float: left;
 			padding-left: 20px;
 		}
 		h3 {
 			padding-left: 20px;
 			text-transform: uppercase;
-			width: 80%;
+			width: 75%;
 			float: left;
 			a:hover {
 				color: inherit !important; 
@@ -292,11 +265,11 @@ footer {
 	}
 	&.x-colophon{
 		&.top {
-    		background-color: #3F3F3F;
+    		background-color: rgba(0,0,36,1);
     		padding: 30px 0 0px;
     	}
     	&.bottom {
-    		background-color: #3F3F3F;
+    		background-color: rgba(0,0,36,1);
     		.x-colophon-content {
 	    		margin: 7px;
 	    		p {
